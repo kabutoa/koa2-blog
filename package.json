@@ -1,0 +1,39 @@
+{
+  "name": "koa2-blog",
+  "version": "1.0.0",
+  "description": "a simple koa2 blog",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/app.mjs",
+    "lint": "eslint . --ext .js,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.4"
+  },
+  "dependencies": {
+    "@koa/cors": "^5.0.0",
+    "@koa/router": "^12.0.1",
+    "koa": "^2.15.0",
+    "koa-bodyparser": "^4.4.1",
+    "koa-nunjucks-2": "^3.0.2",
+    "koa-static": "^5.0.0",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
+    "nunjucks": "^3.2.4"
+  },
+  "lint-staged": {
+    "src/**/*.{js,.mjs,json,css,md}": [
+      "npx prettier --write",
+      "npx eslint --fix"
+    ]
+  }
+}
