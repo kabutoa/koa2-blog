@@ -1,10 +1,28 @@
 import Router from '@koa/router'
 import usersRouter from './users/index.mjs'
+import accountRouter from './account/index.mjs'
+const indexRouter = new Router()
 
-const indexRouter = new Router({
-  prefix: '/api'
+indexRouter.get('/', async (ctx) => {
+  await ctx.render('index', {
+    title: '首页',
+    user: ctx.session.user
+  })
 })
 
-indexRouter.use('/users', usersRouter.routes(), usersRouter.allowedMethods())
+indexRouter.get('/signin', async (ctx) => {
+  await ctx.render('signin', {
+    title: '登录'
+  })
+})
+
+indexRouter.get('/signup', async (ctx) => {
+  await ctx.render('signup', {
+    title: '注册'
+  })
+})
+
+indexRouter.use('/api/users', usersRouter.routes(), usersRouter.allowedMethods())
+indexRouter.use('/api/account', accountRouter.routes(), accountRouter.allowedMethods())
 
 export default indexRouter

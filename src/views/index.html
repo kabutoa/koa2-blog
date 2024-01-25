@@ -1,11 +1,30 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title }}</title>
-  </head>
-  <body>
-    hello world
-  </body>
-</html>
+{% extends './base.html' %} 
+{% block title %}首页{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Welcome</h1>
+  {% if user %}
+  <p>Hello, {{ user.name }}!</p>
+  <button>signout</button>
+  {% else %}
+    <p>Please <a href="/signin">signin</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}
+{% block additionalScripts %}
+<script>
+  const buttonDom = document.getElementsByTagName('button')[0]
+  const onSignout = () => {
+    fetch('/api/account/signout', {
+      method: 'POST'
+    }).then(res => {
+      return res.json();
+    }).then(data => {
+      if(data.status === 'success') {
+        window.location.href = '/'
+      }
+    })
+  }
+  buttonDom.addEventListener('click', onSignout)
+</script>
+{% endblock %}

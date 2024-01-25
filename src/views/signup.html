@@ -1,0 +1,74 @@
+{% extends './base.html' %} 
+{% block title %}注册{% endblock %}
+{% block additionalStyles %}
+  <link rel="stylesheet" href="/css/account.css">
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="box sign-box">
+    <div>
+      <div class="field">
+        <label class="label">用户名</label>
+        <div class="control">
+          <input class="input" id="name" name="name" type="text" placeholder="请输入用户名" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">邮箱</label>
+        <div class="control">
+          <input class="input" id="email" name="email" type="email" placeholder="请输入你的邮箱" />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">密码</label>
+        <div class="control">
+          <input class="input" id="password" name="password" type="password" placeholder="请输入密码" />
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary">立即注册</button>
+        </div>
+        <div class="control">
+          <a href="/signin" class="button is-text">已有账号，去登录</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block additionalScripts %}
+<script>
+  const buttonDom = document.getElementsByTagName('button')[0]
+  const nameDom = document.getElementById('name')
+  const emailDom = document.getElementById('email')
+  const passwordDom = document.getElementById('password')
+  const onSignup = () => {
+    const name = nameDom.value
+    const email = emailDom.value
+    const password = passwordDom.value
+    if(!name || !email || !password) {
+      console.error('please input name email password')
+      return
+    }
+    const formData = new URLSearchParams();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    fetch('/api/account/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData
+    }).then(res => {
+      return res.json();
+    }).then(data => {
+      if(data.status === 'success') {
+        window.location.href = '/signin'
+      }
+    })
+  }
+  buttonDom.addEventListener('click', onSignup)
+</script>
+{% endblock %}

@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import session from 'koa-session'
 import serve from 'koa-static'
 import render from 'koa-nunjucks-2'
 import indexRouter from './router/index.mjs'
@@ -10,6 +11,9 @@ import { port } from './config/index.mjs'
 import { close, connect } from './db/index.mjs'
 
 const app = new Koa()
+
+app.keys = ['my-secret-key']
+app.use(session(app))
 
 app.use(cors()).use(bodyParser())
 
