@@ -1,6 +1,7 @@
 import Router from '@koa/router'
 import usersRouter from './users/index.mjs'
 import accountRouter from './account/index.mjs'
+import postsRouter from './posts/index.mjs'
 const indexRouter = new Router()
 
 indexRouter.get('/', async (ctx) => {
@@ -24,5 +25,6 @@ indexRouter.get('/signup', async (ctx) => {
 
 indexRouter.use('/api/users', usersRouter.routes(), usersRouter.allowedMethods())
 indexRouter.use('/api/account', accountRouter.routes(), accountRouter.allowedMethods())
+indexRouter.use('/api/posts', postsRouter.routes(), postsRouter.allowedMethods())
 
 export default indexRouter

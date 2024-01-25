@@ -9,13 +9,14 @@ import cors from '@koa/cors'
 import bodyParser from 'koa-bodyparser'
 import { port } from './config/index.mjs'
 import { close, connect } from './db/index.mjs'
+import logger from './middlewares/logger.mjs'
 
 const app = new Koa()
 
 app.keys = ['my-secret-key']
 app.use(session(app))
 
-app.use(cors()).use(bodyParser())
+app.use(logger).use(cors()).use(bodyParser())
 
 app.use(async (ctx, next) => {
   await connect()
