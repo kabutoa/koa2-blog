@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/app.mjs",
+    "start": "pm2 start src/app.mjs",
     "lint": "eslint . --ext .js,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write .",
     "prepare": "husky install"
@@ -19,6 +20,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "nodemon": "^3.0.3",
+    "pm2": "^5.3.1",
     "prettier": "^3.2.4"
   },
   "dependencies": {
