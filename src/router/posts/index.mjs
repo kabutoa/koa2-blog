@@ -45,7 +45,7 @@ postsRouter.delete('/', async (ctx) => {
   })
 })
 
-// 更新指定`user`
+// 更新指定`post`
 postsRouter.put('/', async (ctx) => {
   const data = ctx.request.body
   const updatedData = await postModel.findByIdAndUpdate(data.id, data, {
